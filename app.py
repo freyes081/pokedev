@@ -57,12 +57,12 @@ elif random_button:
 #Mostrar la informacion del pokemon
 if pokemon_data:
     #Crear dos columnas para la imagen y la informacion
-    img_col, info_col = st.columns([1, 1])
+    img_col, info_col = st.columns([3, 1])
     with img_col:
         #Mostrar la imagen del pokemon
         st.image(pokemon_data["sprites"]["other"]["official-artwork"]["front_default"], 
                  caption=f"#{pokemon_data['id']} {pokemon_data['name'].title()}",
-                 use_column_width=True) 
+                 use_container_width=True) 
     with info_col:
         #Informacion basica
         st.subheader("Información Básica")
@@ -75,4 +75,25 @@ if pokemon_data:
         for tipo in tipos:
             st.write(f"- {tipo.title()}")             
         
-          
+    #Estadisticas
+    st.subheader("Estadísticas")
+    stats_col = st.columns(3)
+    stats = pokemon_data["stats"]
+    for idx, stat in enumerate(stats):
+        col_idx = idx % 3
+        with stats_col[col_idx]:
+            st.metric(
+                label=stat["stat"]["name"].replace("-", " ").title(),
+                value=stat["base_stat"],
+            )
+    
+    #Habilidades
+    st.subheader("Habilidades")
+    abilities = [ability["ability"]["name"].replace("-", "").title()
+                 for ability in pokemon_data["abilities"]]
+    for ability in abilities:
+        st.write(f"⭐ {ability.title()}")      
+elif pokemon_name:
+    st.error("Pokemon no encontrado,  Verifique e intente nuevamente.")
+else:
+    st.info("Ingresa un nombre de pokemon o presiona el botón para obtener un pokemon aleatorio.")            
