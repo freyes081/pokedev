@@ -1,4 +1,4 @@
-Aquí tienes un ejemplo de un README para tu proyecto:
+
 
 # Pokemon Explorer
 
