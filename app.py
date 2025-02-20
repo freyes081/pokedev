@@ -63,6 +63,16 @@ if pokemon_data:
         st.image(pokemon_data["sprites"]["other"]["official-artwork"]["front_default"], 
                  caption=f"#{pokemon_data['id']} {pokemon_data['name'].title()}",
                  use_column_width=True) 
-                 
+    with info_col:
+        #Informacion basica
+        st.subheader("Información Básica")
+        st.write(f"**Altura:** {pokemon_data['height']/10} m")
+        st.write(f"**Peso:** {pokemon_data['weight']/10} kg")
+        
+        #Tipos
+        st.subheader("Tipos")
+        tipos = [tipo["type"]["name"] for tipo in pokemon_data["types"]]
+        for tipo in tipos:
+            st.write(f"- {tipo.title()}")             
         
           
